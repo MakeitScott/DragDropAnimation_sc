@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:background="@color/material_dynamic_primary95"
+            android:background="#BCA"
             android:padding="10dp">
 
             <Button
@@ -66,6 +66,7 @@
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
+                android:background="@drawable/myrectangle"
                  />
 
             <ImageView
@@ -73,27 +74,31 @@
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                 />
+                android:background="@drawable/myrectangle"
+                />
 
             <ImageView
                 android:id="@+id/holder03"
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                 />
+                android:background="@drawable/myrectangle"
+                />
 
             <ImageView
                 android:id="@+id/holder04"
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
-                 />
+                android:background="@drawable/myrectangle"
+                />
 
             <ImageView
                 android:id="@+id/holder05"
                 android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
+                android:background="@drawable/myrectangle"
                 />
 
         </LinearLayout>
@@ -106,6 +111,15 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:background="@color/design_default_color_secondary">
+
+
+        <ImageView
+
+            android:layout_width="300dp"
+            android:layout_height="450dp"
+            android:background="@drawable/highlightrectangle"
+            android:id="@+id/rocket_image"
+            />
 
 
     </LinearLayout>

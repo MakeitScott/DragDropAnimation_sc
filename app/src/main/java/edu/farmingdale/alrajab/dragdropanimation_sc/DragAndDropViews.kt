@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.Canvas
 import android.graphics.Point
+import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,14 +22,48 @@ class DragAndDropViews : AppCompatActivity() {
         binding = ActivityDragAndDropViewsBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        // a holder listens to the drag
         binding.holder01.setOnDragListener(arrowDragListener)
         binding.holder02.setOnDragListener(arrowDragListener)
+        binding.holder03.setOnDragListener(arrowDragListener)
+        binding.holder04.setOnDragListener(arrowDragListener)
+        binding.holder05.setOnDragListener(arrowDragListener)
+
+
+
+
+        // add the rest of the  buttons
 
 
         binding.upMoveBtn.setOnLongClickListener(onLongClickListener)
+        binding.downMoveBtn.setOnLongClickListener(onLongClickListener)
+        binding.forwardMoveBtn.setOnLongClickListener(onLongClickListener)
+        binding.backMoveBtn.setOnLongClickListener(onLongClickListener)
+// run this function seperatly
+     //   animRocket()
+
+// this needs a click to load the function
+        binding.rocketImage.setOnClickListener{
+            animRocket()
+        }
 
 
 
+    }
+
+
+
+    private fun animRocket(){
+        binding.rocketImage.setBackgroundResource(R.drawable.flying_rocket)
+        val rocketAnimation = binding.rocketImage.background as AnimationDrawable
+// after 1 click on loading the fucntion you need to click it again to play the anamation
+        binding.rocketImage.setOnClickListener {
+            if (rocketAnimation.isRunning) {
+                rocketAnimation.stop()
+            } else {
+                rocketAnimation.start()
+            }
+        }
     }
 
 
@@ -63,9 +98,12 @@ class DragAndDropViews : AppCompatActivity() {
                     return@OnDragListener true
                 }
                 DragEvent.ACTION_DRAG_ENTERED -> {
+
+                    view.setImageResource( R.drawable.highlightrectangle)
                     return@OnDragListener true
                 }
                 DragEvent.ACTION_DRAG_EXITED-> {
+                    view.setImageResource( R.drawable.myrectangle)
                     return@OnDragListener true
                 }
                 // No need to handle this for our use case.
@@ -77,13 +115,21 @@ class DragAndDropViews : AppCompatActivity() {
                     // Read color data from the clip data and apply it to the card view background.
                     val item: ClipData.Item = dragEvent.clipData.getItemAt(0)
                     val lbl = item.text.toString()
-                    Log.d("BCCCCCCCCCCC", "NOTHING > >  " + lbl)
-                   when(lbl.toString()){
-                       "UP"->view.setImageResource( R.drawable.ic_baseline_arrow_upward_24)
+  // debug                  Log.d("BCCCCCCCCCCC", "NOTHING > >  " + lbl)
+  //                 when(lbl.toString()){
+                   when(lbl){
+    //                   "UP"->{      // you can check the value of the button vs if its correct with the solution here
+      //                     view.setImageResource( R.drawable.ic_baseline_arrow_upward_24)
+        //               }
+                       "UP"-> view.setImageResource( R.drawable.ic_baseline_arrow_upward_24)
+                       "DOWN"-> view.setImageResource( R.drawable.ic_baseline_arrow_downward_24)
+                       "FORWARD"-> view.setImageResource( R.drawable.ic_baseline_arrow_forward_24)
+                       "BACK"-> view.setImageResource( R.drawable.ic_baseline_arrow_back_24)
                    }
                     return@OnDragListener true
                 }
                 DragEvent.ACTION_DRAG_ENDED -> {
+
                     return@OnDragListener true
                 }
                 else -> return@OnDragListener false
@@ -98,6 +144,7 @@ class DragAndDropViews : AppCompatActivity() {
         override fun onProvideShadowMetrics(size: Point, touch: Point) {
             val width: Int = view.width
             val height: Int = view.height
+            // how big tdo you want your shadow
             shadow?.setBounds(0, 0, width, height)
             size.set(width, height)
             touch.set(width / 2, height / 2)
